@@ -67,10 +67,17 @@ TODO: This function takes in two numbers as arguments and creates a promise obje
 */
 function isDivisibleBy5(num1, num2) {
     return new Promise(
-    () => {
+    (resolve , reject) => {
 
         // simulated asynchronous operation: checking if a number is even, but with a 1-3 second delay
         setTimeout(() => {
+            const sum = Number(num1) + Number(num2);
+
+                if (sum % 5 === 0) {
+                    resolve("The sum is divisible by 5!");
+                } else {
+                    reject("The sum is NOT divisible by 5!");
+                }
             
         }, getRandomDelay());
     });
@@ -83,6 +90,13 @@ TODO: This function should take in a promise as an argument and changes the text
     @param {Promise} promise - A Promise that contains the resolved or rejected value
 */
 function isDivisibleBy5Handler(promise) {
+    promise
+        .then(resolvedValue => {
+            document.getElementById("output2").innerText = resolvedValue;
+        })
+        .catch(errorValue => {
+            document.getElementById("output2").innerText = errorValue;
+        });
 
 }
 
